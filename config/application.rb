@@ -18,6 +18,14 @@ Bundler.require(*Rails.groups)
 
 module TaskManagerApp
   class Application < Rails::Application
+    # Do not generate files in 'app/assets'
+    config.generators do |g|
+      g.stylesheets     false
+      g.javascripts     false
+      g.helper          false
+      g.channel         assets: false
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
