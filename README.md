@@ -1,6 +1,6 @@
 # Task Manager App
- :heavy_exclamation_mark:
-> Under development
+
+> Under development :heavy_exclamation_mark:
 
 This is a single page web application built for **RubyGarage** test task.
 
