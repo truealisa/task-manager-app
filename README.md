@@ -1,24 +1,70 @@
-# README
+# Task Manager App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a single page web application built for **RubyGarage** test task.
 
-Things you may want to cover:
+> Under development  :heavy_exclamation_mark: :heavy_exclamation_mark: :heavy_exclamation_mark:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+## Technology stack
+* Ruby on Rails (5.1.4)
+* Webpack
 * ...
+
+## Functionality
+- [ ] **Single page application**
+- [ ] **Authentification** (JSON web tokens)
+- [ ] **Managing projects and tasks**
+- [ ] --- Create/update/delete projects
+- [ ] --- Create/update/delete tasks inside of projects
+- [ ] --- Set priority, deadline and status (done/not done) for tasks
+- [ ] **Validation**
+- [ ] --- Server side
+- [ ] --- Client side
+- [ ] **Automated tests**
+
+## Installation
+
+1. Clone the repo.
+
+```
+$ git clone https://github.com/gbarillot/rails-vue-demo-app.git
+```
+
+2. Install the needed gems:
+
+```
+$ bundle install --without production
+```
+
+3. Install frontend dependencies:
+
+```
+$ yarn install
+```
+
+4. Migrate the database:
+
+```
+$ rails db:migrate
+```
+
+## Testing
+
+##### Backend
+
+```
+$ rails exec rspec
+```
+
+##### Frontend
+
+```
+$ ...
+```
+
+## Running the app
+
+Run Task Manager App in a local server:
+
+```
+$ foreman start
+```
