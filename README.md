@@ -58,7 +58,7 @@ $ rails exec rspec
 ##### Frontend
 
 ```
-$ ...
+$ yarn install
 ```
 
 ## Running the app
