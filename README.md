@@ -1,8 +1,8 @@
 # Task Manager App
+ :heavy_exclamation_mark:
+> Under development
 
 This is a single page web application built for **RubyGarage** test task.
-
-> Under development  :heavy_exclamation_mark: :heavy_exclamation_mark: :heavy_exclamation_mark:
 
 ## Technology stack
 * Ruby on Rails (5.1.4)
