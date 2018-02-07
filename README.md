@@ -23,7 +23,7 @@ This is a single page web application built for **RubyGarage** test task.
 
 ## Installation
 
-1. Clone the repo.
+1. Clone the repo:
 
 ```
 $ git clone https://github.com/gbarillot/rails-vue-demo-app.git
@@ -58,7 +58,7 @@ $ rails exec rspec
 ##### Frontend
 
 ```
-$ yarn install
+$ ...
 ```
 
 ## Running the app
