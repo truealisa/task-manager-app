@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks API' do
   # Initialize the test data
+  let(:user) { create(:user) }
   let!(:project) { create(:project) }
   let!(:tasks) { create_list(:task, 20, project_id: project.id) }
   let(:project_id) { project.id }
   let(:id) { tasks.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /projects/:project_id/tasks
   describe 'GET /projects/:project_id/tasks' do
-    before { get "/projects/#{project_id}/tasks" }
+    before { get "/projects/#{project_id}/tasks", params: {}, headers: headers }
 
     context 'when project exists' do
       it 'returns status code 200' do
@@ -36,7 +38,7 @@ RSpec.describe 'Tasks API' do
 
   # Test suite for GET /projects/:project_id/tasks/:id
   describe 'GET /projects/:project_id/tasks/:id' do
-    before { get "/projects/#{project_id}/tasks/#{id}" }
+    before { get "/projects/#{project_id}/tasks/#{id}", params: {}, headers: headers }
 
     context 'when project task exists' do
       it 'returns status code 200' do
@@ -63,10 +65,12 @@ RSpec.describe 'Tasks API' do
 
   # Test suite for PUT /projects/:project_id/tasks
   describe 'POST /projects/:project_id/tasks' do
-    let(:valid_attributes) { { name: 'Visit Narnia', done: false } }
+    let(:valid_attributes) { { name: 'Visit Narnia', done: false }.to_json }
 
     context 'when request attributes are valid' do
-      before { post "/projects/#{project_id}/tasks", params: valid_attributes }
+      before do
+        post "/projects/#{project_id}/tasks", params: valid_attributes, headers: headers
+      end
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -74,7 +78,7 @@ RSpec.describe 'Tasks API' do
     end
 
     context 'when an invalid request' do
-      before { post "/projects/#{project_id}/tasks", params: {} }
+      before { post "/projects/#{project_id}/tasks", params: {}, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -88,9 +92,11 @@ RSpec.describe 'Tasks API' do
 
   # Test suite for PUT /projects/:project_id/tasks/:id
   describe 'PUT /projects/:project_id/tasks/:id' do
-    let(:valid_attributes) { { name: 'Mozart' } }
+    let(:valid_attributes) { { name: 'Mozart' }.to_json }
 
-    before { put "/projects/#{project_id}/tasks/#{id}", params: valid_attributes }
+    before do
+      put "/projects/#{project_id}/tasks/#{id}", params: valid_attributes, headers: headers
+    end
 
     context 'when task exists' do
       it 'returns status code 204' do
@@ -118,7 +124,7 @@ RSpec.describe 'Tasks API' do
 
   # Test suite for DELETE /projects/:id
   describe 'DELETE /projects/:id' do
-    before { delete "/projects/#{project_id}/tasks/#{id}" }
+    before { delete "/projects/#{project_id}/tasks/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
