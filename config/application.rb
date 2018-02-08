@@ -20,6 +20,7 @@ module TaskManagerApp
   class Application < Rails::Application
     # Do not generate files in 'app/assets'
     config.generators do |g|
+      g.test_framework  false
       g.stylesheets     false
       g.javascripts     false
       g.helper          false
