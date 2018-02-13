@@ -8,10 +8,10 @@ RSpec.describe 'Projects API', type: :request do
   # authorize request
   let(:headers) { valid_headers }
 
-  # Test suite for GET /projects
-  describe 'GET /projects' do
+  # Test suite for GET /api/projects
+  describe 'GET /api/projects' do
     # make HTTP get request before each example
-    before { get '/projects', params: {}, headers: headers }
+    before { get '/api/projects', params: {}, headers: headers }
 
     it 'returns projects' do
       # Note `json` is a custom helper to parse JSON responses
@@ -24,9 +24,9 @@ RSpec.describe 'Projects API', type: :request do
     end
   end
 
-  # Test suite for GET /projects/:id
-  describe 'GET /projects/:id' do
-    before { get "/projects/#{project_id}", params: {}, headers: headers }
+  # Test suite for GET /api/projects/:id
+  describe 'GET /api/projects/:id' do
+    before { get "/api/projects/#{project_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the project' do
@@ -52,15 +52,15 @@ RSpec.describe 'Projects API', type: :request do
     end
   end
 
-  # Test suite for POST /projects
-  describe 'POST /projects' do
+  # Test suite for POST /api/projects
+  describe 'POST /api/projects' do
     let(:valid_attributes) do
       # send json payload
       { title: 'Learn Elm', created_by: user.id.to_s }.to_json
     end
 
     context 'when the request is valid' do
-      before { post '/projects', params: valid_attributes, headers: headers }
+      before { post '/api/projects', params: valid_attributes, headers: headers }
 
       it 'creates a project' do
         expect(json['title']).to eq('Learn Elm')
@@ -73,7 +73,7 @@ RSpec.describe 'Projects API', type: :request do
 
     context 'when the request is invalid' do
       let(:invalid_attributes) { { title: nil }.to_json }
-      before { post '/projects', params: invalid_attributes, headers: headers }
+      before { post '/api/projects', params: invalid_attributes, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -86,12 +86,12 @@ RSpec.describe 'Projects API', type: :request do
     end
   end
 
-  # Test suite for PUT /projects/:id
-  describe 'PUT /projects/:id' do
+  # Test suite for PUT /api/projects/:id
+  describe 'PUT /api/projects/:id' do
     let(:valid_attributes) { { title: 'Shopping' }.to_json }
 
     context 'when the record exists' do
-      before { put "/projects/#{project_id}", params: valid_attributes, headers: headers }
+      before { put "/api/projects/#{project_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -103,9 +103,9 @@ RSpec.describe 'Projects API', type: :request do
     end
   end
 
-  # Test suite for DELETE /projects/:id
-  describe 'DELETE /projects/:id' do
-    before { delete "/projects/#{project_id}", params: {}, headers: headers }
+  # Test suite for DELETE /api/projects/:id
+  describe 'DELETE /api/projects/:id' do
+    before { delete "/api/projects/#{project_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
