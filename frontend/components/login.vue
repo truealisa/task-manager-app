@@ -2,6 +2,7 @@
   <div class="login-wrapper border border-light">
     <form class="form-signin" @submit.prevent="login">
       <h2 class="form-signin-heading">Please sign in</h2>
+      <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
@@ -12,19 +13,31 @@
 </template>
 
 <script>
+import { apiUrls } from '../global_variables'
+
 export default {
   name: 'Login',
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: false
     }
   },
+  created () {
+    this.checkCurrentLogin()
+  },
+  updated () {
+    this.checkCurrentLogin()
+  },
   methods: {
+    checkCurrentLogin () {
+      if (localStorage.token) {
+        this.$router.replace(this.$route.query.redirect || '/projects')
+      }
+    },
     login () {
-      console.log(this.email)
-      console.log(this.password)
-      fetch("http://localhost:5000/api/auth/login", {
+      fetch(apiUrls.baseURL + apiUrls.loginURL, {
             method: "POST",
             headers: {
               'Accept': 'application/json',
@@ -35,7 +48,24 @@ export default {
               password: this.password
             })
       }).then(response => response.json())
-        .then(json => console.log(json));
+        .then(json => this.requestSucceed(json))
+        .catch(error => this.requestFailed(error));
+    },
+
+    requestSucceed (jsonResponse) {
+      if (!jsonResponse.auth_token) {
+        this.error = jsonResponse.message
+        return
+      }
+
+      localStorage.token = jsonResponse.auth_token
+      this.error = false
+      this.$router.replace(this.$route.query.redirect || '/projects')
+    },
+
+    requestFailed (error) {
+      this.error = 'Login failed!'
+      delete localStorage.token
     }
   }
 }

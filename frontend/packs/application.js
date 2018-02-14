@@ -3,7 +3,8 @@ import "./application.css";
 // import Vue and components
 import Vue from 'vue'
 import router from '../router'
-import App from '../components/app.vue'
+import App from '../components/app'
+import Hello from '../components/hello'
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('application'))
