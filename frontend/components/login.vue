@@ -14,6 +14,7 @@
 
 <script>
 import { apiUrls } from '../global_variables'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Login',
@@ -30,12 +31,16 @@ export default {
   updated () {
     this.checkCurrentLogin()
   },
+  computed: {
+      ...mapGetters({ currentUser: 'currentUser' })
+  },
   methods: {
     checkCurrentLogin () {
-      if (localStorage.token) {
+      if (this.currentUser) {
         this.$router.replace(this.$route.query.redirect || '/projects')
       }
     },
+
     login () {
       fetch(apiUrls.baseURL + apiUrls.loginURL, {
             method: "POST",
@@ -57,14 +62,15 @@ export default {
         this.error = jsonResponse.message
         return
       }
-
       localStorage.token = jsonResponse.auth_token
       this.error = false
+      this.$store.dispatch('login')
       this.$router.replace(this.$route.query.redirect || '/projects')
     },
 
     requestFailed (error) {
       this.error = 'Login failed!'
+      this.$store.dispatch('logout')
       delete localStorage.token
     }
   }

@@ -3,6 +3,7 @@ import "./application.css";
 // import Vue and components
 import Vue from 'vue'
 import router from '../router'
+import store from '../store'
 import App from '../components/app'
 import Hello from '../components/hello'
 
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el,
     router,
+    store,
     render: h => h(App)
   })
 

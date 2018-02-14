@@ -3128,6 +3128,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jwt-decode@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-2.2.0.tgz#7d86bd56679f58ce6a84704a657dd392bba81a79"
+
 killable@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.0.tgz#da8b84bd47de5395878f95d64d02f2449fe05e6b"
@@ -5858,6 +5862,10 @@ vue-template-es2015-compiler@^1.6.0:
 vue@^2.5.13:
   version "2.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"
+
+vuex@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
 
 watchpack@^1.4.0:
   version "1.4.0"
