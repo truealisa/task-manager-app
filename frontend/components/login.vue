@@ -24,6 +24,18 @@ export default {
     login () {
       console.log(this.email)
       console.log(this.password)
+      fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: this.email,
+              password: this.password
+            })
+      }).then(response => response.json())
+        .then(json => console.log(json));
     }
   }
 }
