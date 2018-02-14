@@ -86,6 +86,12 @@ body {
   background: #fff;
   width: 70%;
   margin: 12% auto;
+  animation: fadein 0.6s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .form-signin {

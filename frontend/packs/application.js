@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     router,
     store,
     render: h => h(App)
+    // template: '<App/>',
+    // components: { App }
   })
 
   console.log(app)
