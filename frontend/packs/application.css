@@ -1,1 +1,11 @@
 @import "bootstrap/dist/css/bootstrap.css";
+
+.btn {
+    text-shadow: 0px -1px 0px #555;
+    background: linear-gradient(#4A80B8, #35619E);
+    border-radius: 2px;
+    border: none;
+    border-top-color: #8AAFD4;
+    box-shadow: 0px -1px 0px 0px #8AAFD4,
+                0px -1px 0px 1px #35619E;
+}

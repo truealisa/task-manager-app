@@ -1,7 +1,6 @@
 <template>
   <footer>
-    <hr/>
-    <p class="text-muted">Built with ♥︎ by <a href="https://github.com/paweljw">Paweł J. Wal</a></p>
+    <p class="copyright">© RubyGarage & truealisa</p>
   </footer>
 </template>
 
@@ -10,3 +9,17 @@ export default {
   name: 'Foot'
 }
 </script>
+
+<style lang="css">
+  footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+  }
+
+  .copyright {
+    color: #fff;
+    text-align: center;
+  }
+</style>

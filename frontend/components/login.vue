@@ -1,7 +1,8 @@
 <template>
   <div class="login-wrapper border border-light">
+    <h2 class="login-heading">Please sign in</h2>
     <form class="form-signin" @submit.prevent="login">
-      <h2 class="form-signin-heading">Please sign in</h2>
+      <h3 class="form-heading">Enter your email and password:</h3>
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -9,6 +10,7 @@
       <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
+    <p class="signup-question">Do not have an account? <router-link to="/">Sign up</router-link></p>
   </div>
 </template>
 
@@ -59,7 +61,7 @@ export default {
 
     requestSucceed (jsonResponse) {
       if (!jsonResponse.auth_token) {
-        this.error = jsonResponse.message
+        this.error = "Your email or password is incorrect"
         return
       }
       localStorage.token = jsonResponse.auth_token
@@ -78,15 +80,13 @@ export default {
 </script>
 
 <style lang="css">
-body {
-  background-color: #605B56;
-}
-
 .login-wrapper {
   background: #fff;
-  width: 70%;
-  margin: 12% auto;
+  max-width: 500px;
+  margin: 4% auto;
   animation: fadein 0.6s;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 @keyframes fadein {
@@ -94,18 +94,38 @@ body {
     to   { opacity: 1; }
 }
 
+.login-heading {
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  background: linear-gradient(#4A80B8, #35619E);
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  text-shadow: 0px 1px 0px #555;
+  border-radius: 2px;
+  border-top-color: #8AAFD4;
+  box-shadow: 0px -1px 0px 0px #8AAFD4,
+              0px -1px 0px 1px #35619E;
+
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+}
+
 .form-signin {
   max-width: 330px;
-  padding: 10% 15px;
+  padding: 0 15px 10px 15px;
   margin: 0 auto;
+  position: relative;
 }
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
+
+.form-signin .form-heading {
+  font-size: 18px;
+  color: #333;
+  padding: 0;
+  margin-bottom: 15px;
 }
-.form-signin .checkbox {
-  font-weight: normal;
-}
+
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -118,13 +138,30 @@ body {
   z-index: 2;
 }
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
   border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  margin-bottom: 30px;
+}
+
+.signup-question {
+  color: #666;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-signin .alert {
+  position: absolute;
+  top: -13px;
+  left: 15px;
+  width: 91%;
+  z-index: 999;
+  animation: fadein 0.6s;
 }
 </style>
