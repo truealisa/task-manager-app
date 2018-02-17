@@ -10,8 +10,8 @@ export default class User {
     }
   }
 
-  constructor ({ user_id, email }) {
+  constructor ({ user_id, name }) {
     this.id = user_id
-    this.email = email
+    this.name = name
   }
 }

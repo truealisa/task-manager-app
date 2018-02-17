@@ -5,7 +5,11 @@ import Vue from 'vue'
 import router from '../router'
 import store from '../store'
 import App from '../components/app'
-import Hello from '../components/hello'
+// import icons
+import '../icons'
+import Icon from 'vue-awesome/components/Icon'
+
+Vue.component('icon', Icon)
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.body.appendChild(document.createElement('application'))
@@ -15,6 +19,4 @@ document.addEventListener('DOMContentLoaded', () => {
     store,
     render: h => h(App)
   })
-
-  console.log(app)
 })

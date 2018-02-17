@@ -1,12 +1,9 @@
 <template>
-  <nav class="navbar navbar-dark bg-bookstore">
-    <a class="navbar-brand" href="/">Bookstore</a>
-
+  <nav class="navbar">
     <span class="navbar-text">
-      {{ currentUser.email }}
-      <router-link to="/logout" class="btn btn-logout btn-sm">Logout</router-link>
+      Hello, {{ currentUser.name }}!
+      <router-link to="/logout" class="btn btn-logout">Logout</router-link>
     </span>
-
   </nav>
 </template>
 
@@ -22,19 +19,22 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.bg-bookstore {
-  background: #605B56 !important;
-}
+  .navbar {
+    padding: 0;
+    color: #555;
+  }
 
-.btn-logout {
-  background-color: #837A75;
-  border-color: #837A75;
-  color: #fff;
-}
+  .navbar .navbar-text {
+    width: 100%;
+    text-align: right;
+    margin-right: 15px;
+    padding-bottom: 0;
+  }
 
-.btn-logout:hover {
-  background-color: #56504c;
-  border-color: #56504c;
-  color: #fff;
-}
+  .btn-logout {
+    color: #fff;
+    padding: 5px 8px 8px;
+    line-height: 16px;
+    margin-left: 10px;
+  }
 </style>

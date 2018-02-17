@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './components/login'
 import Logout from './components/logout'
-import Hello from './components/hello'
+import Signup from './components/signup'
+import Home from './components/home'
 
 Vue.use(Router)
 
@@ -11,18 +12,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: 'Home',
+      component: Home
     },
     {
-      path: '/projects',
-      name: 'Projects',
-      component: Hello
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/logout',
       name: 'Logout',
       component: Logout
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup
     }
   ]
 })

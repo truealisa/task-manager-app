@@ -1,0 +1,5 @@
+import 'vue-awesome/icons/calendar-o'
+import 'vue-awesome/icons/trash'
+import 'vue-awesome/icons/pencil'
+import 'vue-awesome/icons/caret-up'
+import 'vue-awesome/icons/caret-down'

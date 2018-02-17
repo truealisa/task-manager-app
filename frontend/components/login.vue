@@ -8,9 +8,9 @@
       <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
       <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button class="btn btn-login btn-primary btn-block" type="submit">Sign in</button>
     </form>
-    <p class="signup-question">Do not have an account? <router-link to="/">Sign up</router-link></p>
+    <p class="signup-question">Do not have an account? <router-link to="#">Sign up</router-link></p>
   </div>
 </template>
 
@@ -27,19 +27,23 @@ export default {
       error: false
     }
   },
+
   created () {
     this.checkCurrentLogin()
   },
+
   updated () {
     this.checkCurrentLogin()
   },
+
   computed: {
       ...mapGetters({ currentUser: 'currentUser' })
   },
+
   methods: {
     checkCurrentLogin () {
       if (this.currentUser) {
-        this.$router.replace(this.$route.query.redirect || '/projects')
+        this.$router.replace(this.$route.query.redirect || '/')
       }
     },
 
@@ -56,7 +60,7 @@ export default {
             })
       }).then(response => response.json())
         .then(json => this.requestSucceed(json))
-        .catch(error => this.requestFailed(error));
+        .catch(error => this.requestFailed(error))
     },
 
     requestSucceed (jsonResponse) {
@@ -67,7 +71,7 @@ export default {
       localStorage.token = jsonResponse.auth_token
       this.error = false
       this.$store.dispatch('login')
-      this.$router.replace(this.$route.query.redirect || '/projects')
+      this.$router.replace(this.$route.query.redirect || '/')
     },
 
     requestFailed (error) {
