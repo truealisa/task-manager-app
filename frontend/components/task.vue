@@ -26,8 +26,8 @@
 .task-box {
   background: #fff;
   border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border-right: 1px solid #aaa;
+  border-left: 1px solid #aaa;
   position: relative;
 }
 
@@ -46,7 +46,7 @@
   line-height: 45px;
   padding-left: 20px;
   border-left: 1px solid #ddd;
-  width: 73.2%;
+  width: calc(100% - 180px);
 }
 
 .task-box .task-name:before,
@@ -132,5 +132,6 @@
 .task-box:last-child {
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border-bottom: 1px solid #aaa;
 }
 </style>

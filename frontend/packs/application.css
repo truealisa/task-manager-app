@@ -1,7 +1,8 @@
 @import "bootstrap/dist/css/bootstrap.css";
 
 .btn-logout,
-.btn-login {
+.btn-login,
+.btn-add-project {
     text-shadow: 0px -1px 0px #555;
     background: linear-gradient(#4A80B8, #35619E);
     border-radius: 2px;
@@ -13,7 +14,8 @@
 }
 
 .btn-logout:hover,
-.btn-login:hover {
+.btn-login:hover,
+.btn-add-project:hover {
     box-shadow: 0px -1px 0px 0px #8AAFD4,
                 0 0 3px 1px #333;
 }

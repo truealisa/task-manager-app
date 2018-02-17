@@ -1,11 +1,12 @@
 <template>
   <div class="project-box">
     <div class="project-title">
-        <icon class="calendar-icon" name="calendar-o" scale="1.4"></icon>
-        <h5>{{ project.title }}</h5>
-        <button class="btn btn-project-edit"><icon name="pencil" scale="1.1"></icon></button>
-        <button class="btn btn-project-trash"><icon name="trash" scale="1.1"></icon></button>
+      <icon class="calendar-icon" name="calendar-o" scale="1.4"></icon>
+      <h5>{{ project.title }}</h5>
+      <button class="btn btn-project-edit"><icon name="pencil" scale="1.1"></icon></button>
+      <button class="btn btn-project-trash"><icon name="trash" scale="1.1"></icon></button>
     </div>
+    <TaskAdder></TaskAdder>
     <div class="tasks-list">
       <Task v-for="task in tasks" :key="task.id" :task="task"></Task>
     </div>
@@ -14,6 +15,7 @@
 
 <script>
 import Task from './task'
+import TaskAdder from './task_adder'
 
 export default {
   name: 'Project',
@@ -28,7 +30,8 @@ export default {
   methods: {
   },
   components: {
-    Task
+    Task,
+    TaskAdder
   }
 }
 </script>
@@ -37,7 +40,7 @@ export default {
   .project-box {
     margin: 0;
     padding: 0;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
   .calendar-icon.fa-icon {

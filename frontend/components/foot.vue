@@ -12,8 +12,9 @@ export default {
 
 <style lang="css">
   footer {
-    position: absolute;
-    bottom: 20px;
+    position: relative;
+    margin-top: 60px;
+    margin-bottom: 30px;
     left: 0;
     right: 0;
   }

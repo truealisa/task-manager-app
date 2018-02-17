@@ -48,7 +48,7 @@ export default {
 html {
   border-bottom: 7px solid #333;
   border-top: 7px solid #333;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -65,7 +65,7 @@ body {
   text-transform: uppercase;
   color: #333;
   line-height: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   text-shadow: 0px 1px 0px #eee;
 }
 
