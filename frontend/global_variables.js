@@ -4,9 +4,7 @@ const apiUrls = {
     loginURL: "/auth/login",
     signupURL: "/signup",
     projectsAffix: "/projects",
-    tasksAffix: "/tasks",
-    editAffix: "/edit",
-    newAffix: "/new"
+    tasksAffix: "/tasks"
 }
 
 module.exports = { apiUrls : apiUrls };

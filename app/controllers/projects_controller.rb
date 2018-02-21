@@ -21,13 +21,15 @@ class ProjectsController < ApplicationController
   # PUT /projects/:id
   def update
     @project.update(project_params)
-    head :no_content
+    json_response(@project)
+    # head :no_content
   end
 
   # DELETE /projects/:id
   def destroy
     @project.destroy
-    head :no_content
+    json_response(@project)
+    # head :no_content
   end
 
   private

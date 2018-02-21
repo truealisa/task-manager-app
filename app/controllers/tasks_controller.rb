@@ -21,13 +21,15 @@ class TasksController < ApplicationController
   # PUT /projects/:project_id/tasks/:id
   def update
     @task.update(task_params)
-    head :no_content
+    json_response(@task)
+    # head :no_content
   end
 
   # DELETE /projects/:project_id/tasks/:id
   def destroy
     @task.destroy
-    head :no_content
+    json_response(@project.tasks)
+    # head :no_content
   end
 
   private

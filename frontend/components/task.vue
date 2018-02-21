@@ -1,23 +1,128 @@
 <template>
   <div class="task-box">
-    <input class="status-checkbox" type="checkbox">
-    <div class="task-name">{{ task.name }}</div>
-    <button class="btn btn-task-up"><icon name="caret-up" scale="1"></icon></button>
-    <button class="btn btn-task-down"><icon name="caret-up" scale="1"></icon></button>
-    <button class="btn btn-task-edit"><icon name="pencil" scale="1"></icon></button>
-    <button class="btn btn-task-trash"><icon name="trash" scale="1"></icon></button>
+    <input class="status-checkbox" type="checkbox" v-model="task.status" v-bind:id="task.id" @change="toggleStatus">
+    <div class="task-name">
+      <span v-if="task.status" style="text-decoration: line-through">{{ task.name }}</span>
+      <span v-if="!task.status">{{ task.name }}</span>
+    </div>
+    <div v-if="taskEditing" v-click-outside="updateTask">
+      <input id="edit-task-input" type="text" :value="task.name" @keyup.enter="updateTask" @keyup.esc="cancelUpdating" ref="editTaskField">
+      <button class="btn btn-close-editing" @click="cancelUpdating"><icon name="times" scale="1"></icon></button>
+    </div>
+    <button class="btn btn-task-up" @click="increasePriority" data-toggle="tooltip" data-placement="top" :title="'Priority: ' + task.priority + '. Up ↑'"><icon name="caret-up" scale="1"></icon></button>
+    <button class="btn btn-task-down" @click="decreasePriority" data-toggle="tooltip" data-placement="top" :title="'Priority: ' + task.priority + '. Down ↓'"><icon name="caret-up" scale="1"></icon></button>
+    <button class="btn btn-task-edit" @click="editTask" data-toggle="tooltip" data-placement="top" title="Edit"><icon name="pencil" scale="1"></icon></button>
+    <button class="btn btn-task-trash" @click="removeTask" data-toggle="tooltip" data-placement="top" title="Delete"><icon name="trash" scale="1"></icon></button>
   </div>
 </template>
 
 <script>
+import { apiUrls } from '../global_variables'
+import vClickOutside from 'v-click-outside'
+
     export default {
       name: 'Task',
       props: ['task'],
+      directives: {
+        clickOutside: vClickOutside.directive
+      },
       data () {
         return {
+          project: this.$parent.$data,
+          taskEditing: false
         }
       },
       methods: {
+        removeTask () {
+          const removeTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+          fetch(removeTaskUrl, {
+                method: "DELETE",
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': "Bearer " + localStorage.token
+                }
+          }).then(response => response.json())
+            .then(json => this.$parent.$data.tasks = json)
+        },
+
+        editTask() {
+          this.taskEditing = true
+          this.$nextTick(() => {
+            this.$refs.editTaskField.focus()
+          })
+        },
+
+        updateTask() {
+          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+          const editTaskInput = this.$refs.editTaskField.value
+          fetch(editTaskUrl, {
+            method: "PUT",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + localStorage.token
+            },
+            body: JSON.stringify({
+              name: editTaskInput
+            })
+          }).then(response => response.json())
+            // .then(json => console.log(json))
+            .catch(error => console.log(error))
+          this.task.name = editTaskInput
+          this.taskEditing = false
+        },
+
+        cancelUpdating() {
+          this.taskEditing = false
+        },
+
+        toggleStatus() {
+          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+          fetch(editTaskUrl, {
+            method: "PUT",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + localStorage.token
+            },
+            body: JSON.stringify({
+              status: this.task.status
+            })
+          }).then(response => response.json())
+            // .then(json => console.log(json))
+            .catch(error => console.log(error))
+        },
+
+        increasePriority() {
+          this.task.priority = parseInt(this.task.priority) + 1
+          this.updatePriority()
+        },
+
+        decreasePriority() {
+          if (this.task.priority == 0) {
+            return
+          }
+          this.task.priority = parseInt(this.task.priority) - 1
+          this.updatePriority()
+        },
+
+        updatePriority() {
+          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+          fetch(editTaskUrl, {
+            method: "PUT",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + localStorage.token
+            },
+            body: JSON.stringify({
+              priority: this.task.priority
+            })
+          }).then(response => response.json())
+            // .then(json => console.log(json))
+            .catch(error => console.log(error))
+        }
       }
     }
 </script>
@@ -64,6 +169,21 @@
 
 .task-box .task-name:after {
   right: 115px;
+}
+
+#edit-task-input {
+  position: absolute;
+  left: 60px;
+  top: 2px;
+  width: calc(100% - 183px);
+}
+
+.btn-close-editing {
+  position: absolute;
+  right: 120px;
+  top: 5px;
+  background-color: transparent;
+  color: #888;
 }
 
 .task-box:hover .btn-task-edit,

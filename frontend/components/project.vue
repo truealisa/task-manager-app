@@ -3,12 +3,12 @@
     <div class="project-title">
       <icon class="calendar-icon" name="calendar-o" scale="1.4"></icon>
       <h5>{{ project.title }}</h5>
-      <button class="btn btn-project-edit"><icon name="pencil" scale="1.1"></icon></button>
-      <button class="btn btn-project-trash"><icon name="trash" scale="1.1"></icon></button>
+      <button class="btn btn-project-edit" data-toggle="tooltip" data-placement="top" title="Edit"><icon name="pencil" scale="1.1"></icon></button>
+      <button class="btn btn-project-trash" data-toggle="tooltip" data-placement="top" title="Delete"><icon name="trash" scale="1.1"></icon></button>
     </div>
     <TaskAdder></TaskAdder>
     <div class="tasks-list">
-      <Task v-for="task in tasks" :key="task.id" :task="task"></Task>
+      <Task v-for="task in sortedTasks" :key="task.id" :task="task"></Task>
     </div>
   </div>
 </template>
@@ -22,12 +22,18 @@ export default {
   props: ['project'],
   data () {
     return {
-      tasks: this.project.tasks
+      tasks: this.project.tasks,
+      id: this.project.id
     }
   },
   created () {
   },
   methods: {
+  },
+  computed: {
+    sortedTasks: function () {
+      return this.tasks.sort((a, b) => b.priority - a.priority).sort((a, b) => a.status - b.status)
+    }
   },
   components: {
     Task,

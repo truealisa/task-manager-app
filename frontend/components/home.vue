@@ -36,10 +36,7 @@ export default {
                 'Authorization': "Bearer " + localStorage.token
               }
       }).then(response => response.json())
-        .then(json => {
-          console.log(json)
-          this.projects = json
-        })
+        .then(json => this.projects = json)
         .catch(error => {
           this.error = error
           console.log(error)
