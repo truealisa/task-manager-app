@@ -67,7 +67,6 @@ import vClickOutside from 'v-click-outside'
               name: editTaskInput
             })
           }).then(response => response.json())
-            // .then(json => console.log(json))
             .catch(error => console.log(error))
           this.task.name = editTaskInput
           this.taskEditing = false
@@ -90,7 +89,6 @@ import vClickOutside from 'v-click-outside'
               status: this.task.status
             })
           }).then(response => response.json())
-            // .then(json => console.log(json))
             .catch(error => console.log(error))
         },
 
@@ -120,7 +118,6 @@ import vClickOutside from 'v-click-outside'
               priority: this.task.priority
             })
           }).then(response => response.json())
-            // .then(json => console.log(json))
             .catch(error => console.log(error))
         }
       }

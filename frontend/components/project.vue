@@ -72,7 +72,6 @@ export default {
           title: editProjectInput
         })
       }).then(response => response.json())
-        // .then(json => console.log(json))
         .catch(error => console.log(error))
       this.project.title = editProjectInput
       this.projectEditing = false

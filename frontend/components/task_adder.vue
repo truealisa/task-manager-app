@@ -76,7 +76,6 @@ export default {
     },
 
     requestSucceed (jsonResponse) {
-      console.log(jsonResponse)
       this.$parent.$data.tasks = jsonResponse.tasks
       this.showTaskModal = false
       this.$refs.addTaskInput.value = ""
