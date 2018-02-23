@@ -4,8 +4,8 @@ This is a single page web application built for **RubyGarage** test task.
 
 ## Technology stack
 * Ruby on Rails (5.1.4)
-* VueJS
-* Webpacker
+* VueJS (2.5.13)
+* Webpack
 
 ## Functionality
 - [x] **Single page application**
@@ -24,7 +24,7 @@ This is a single page web application built for **RubyGarage** test task.
 1. Clone the repo:
 
 ```
-$ git clone https://github.com/gbarillot/rails-vue-demo-app.git
+$ git clone https://github.com/truealisa/task-manager-app.git
 ```
 
 2. Install the needed gems:
