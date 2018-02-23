@@ -1,6 +1,5 @@
 const apiUrls = {
-  baseURL: "http://localhost:5000/api",
-
+  baseURL: "/api",
   loginURL: "/auth/login",
   signupURL: "/signup",
   projectsAffix: "/projects",

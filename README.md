@@ -1,25 +1,23 @@
 # Task Manager App
 
-> Under development :heavy_exclamation_mark:
-
 This is a single page web application built for **RubyGarage** test task.
 
 ## Technology stack
 * Ruby on Rails (5.1.4)
-* Webpack
-* ...
+* VueJS
+* Webpacker
 
 ## Functionality
-- [ ] **Single page application**
-- [ ] **Authentification** (JSON web tokens)
-- [ ] **Managing projects and tasks**
-- [ ] --- Create/update/delete projects
-- [ ] --- Create/update/delete tasks inside of projects
-- [ ] --- Set priority, deadline and status (done/not done) for tasks
-- [ ] **Validation**
-- [ ] --- Server side
-- [ ] --- Client side
-- [ ] **Automated tests**
+- [x] **Single page application**
+- [x] **Authentification** (JSON web tokens)
+- [x] **Managing projects and tasks**
+- [x] --- Create/update/delete projects
+- [x] --- Create/update/delete tasks inside of projects
+- [x] --- Set priority, deadline and status (done/not done) for tasks
+- [x] **Validation**
+- [x] --- Server side
+- [x] --- Client side
+- [x] **Automated tests** (backend)
 
 ## Installation
 
@@ -32,7 +30,7 @@ $ git clone https://github.com/gbarillot/rails-vue-demo-app.git
 2. Install the needed gems:
 
 ```
-$ bundle install --without production
+$ bundle install
 ```
 
 3. Install frontend dependencies:
@@ -49,16 +47,8 @@ $ rails db:migrate
 
 ## Testing
 
-##### Backend
-
 ```
 $ rails exec rspec
-```
-
-##### Frontend
-
-```
-$ ...
 ```
 
 ## Running the app
