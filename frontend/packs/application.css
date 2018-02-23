@@ -2,20 +2,27 @@
 
 .btn-logout,
 .btn-login,
-.btn-add-project {
-    text-shadow: 0px -1px 0px #555;
-    background: linear-gradient(#4A80B8, #35619E);
-    border-radius: 2px;
-    border: none;
-    border-top-color: #8AAFD4;
-    box-shadow: 0px -1px 0px 0px #8AAFD4,
-                0px -1px 0px 1px #35619E;
-    color: #fff;
+.btn-signup,
+.btn-add-project,
+.btn-create-project,
+.modal-header,
+.btn-modal-add-task {
+  text-shadow: 0px -1px 0px #555;
+  background: linear-gradient(#4A80B8, #35619E);
+  border-radius: 2px;
+  border: none;
+  border-top-color: #8AAFD4;
+  box-shadow: 0px -1px 0px 0px #8AAFD4,
+  0px -1px 0px 1px #35619E;
+  color: #fff;
 }
 
 .btn-logout:hover,
 .btn-login:hover,
-.btn-add-project:hover {
-    box-shadow: 0px -1px 0px 0px #8AAFD4,
-                0 0 3px 1px #333;
+.btn-signup:hover,
+.btn-add-project:hover,
+.btn-create-project:hover,
+.btn-modal-add-task:hover {
+  box-shadow: 0px -1px 0px 0px #8AAFD4,
+  0 0 3px 1px #333;
 }

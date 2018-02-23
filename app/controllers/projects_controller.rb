@@ -22,14 +22,12 @@ class ProjectsController < ApplicationController
   def update
     @project.update(project_params)
     json_response(@project)
-    # head :no_content
   end
 
   # DELETE /projects/:id
   def destroy
     @project.destroy
-    json_response(@project)
-    # head :no_content
+    json_response(current_user.projects)
   end
 
   private

@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/login') {
+      if (!this.currentUser && this.$route.path !== '/login' && this.$route.path !== '/signup') {
         this.$router.push('/login')
       }
     }

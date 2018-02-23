@@ -141,15 +141,20 @@ import vClickOutside from 'v-click-outside'
 }
 
 .status-checkbox {
-  margin: 0 13px 0 18px;
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transform: translateY(-50%);
 }
 
 .task-box .task-name {
   font-size: 14px;
   color: #666;
   display: inline-block;
+  word-wrap: break-word;
   line-height: 45px;
   padding-left: 20px;
+  margin-left: 47px;
   border-left: 1px solid #ddd;
   width: calc(100% - 180px);
 }
@@ -157,7 +162,7 @@ import vClickOutside from 'v-click-outside'
 .task-box .task-name:before,
 .task-box .task-name:after {
   content: '';
-  height: 45px;
+  height: 100%;
   width: 1px;
   border-right: 1px solid #ddd;
   position: absolute;
@@ -169,6 +174,7 @@ import vClickOutside from 'v-click-outside'
 
 .task-box .task-name:after {
   right: 115px;
+  top: 0;
 }
 
 #edit-task-input {
@@ -210,11 +216,11 @@ import vClickOutside from 'v-click-outside'
 }
 
 .btn-task-up {
-  top: 2;
+  top: 0;
 }
 
 .btn-task-down {
-  bottom: 0px;
+  top: 24px;
   transform: rotate(180deg);
 }
 
