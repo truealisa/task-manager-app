@@ -2,6 +2,8 @@
 
 This is a single page web application built for **RubyGarage** test task.
 
+Deployed here: https://task-manager-app-rubygarage.herokuapp.com/
+
 ## Technology stack
 * Ruby on Rails (5.1.4)
 * VueJS (2.5.13)
