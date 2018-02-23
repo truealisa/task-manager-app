@@ -76,11 +76,11 @@ export default {
         this.error = jsonResponse.message.replace(/,/g,'<br>• ').replace(/:/g,':<br>• ')
         return
       }
+      console.log(jsonResponse)
       localStorage.token = jsonResponse.auth_token
       this.error = false
       this.$store.dispatch('login')
       this.$router.replace(this.$route.query.redirect || '/')
-      console.log(jsonResponse)
     },
 
     requestFailed (error) {
