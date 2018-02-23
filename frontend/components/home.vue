@@ -17,7 +17,7 @@
                     <h4 class="modal-title">Add TODO List</h4>
                   </div>
                   <div class="modal-body">
-                    <input id="add-project-input" ref="addProjectInput" @keyup.enter="createProject" class="form-control" type="text" placeholder="Give you list a name"><br>
+                    <input id="add-project-input" ref="addProjectInput" @keyup.enter="createProject" class="form-control" type="text" placeholder="Give your list a name"><br>
                     <button class="btn btn-primary btn-block btn-create-project" @click="createProject">Create</button>
                   </div>
                 </div>
