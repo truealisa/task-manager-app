@@ -108,7 +108,7 @@ export default {
 <style scoped>
 .projects-wrapper {
   width: 100%;
-  padding: 0;
+  padding: 0 15px;
 }
 
 .btn-add-project {
