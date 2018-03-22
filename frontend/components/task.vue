@@ -5,6 +5,7 @@
       <span v-if="task.status" style="text-decoration: line-through">{{ task.name }}</span>
       <span v-if="!task.status">{{ task.name }}</span>
     </div>
+    <input id="deadline-input" type="date" :value="task.deadline" @change="updateDeadline" ref="deadlineInput">
     <div v-if="taskEditing" v-click-outside="updateTask">
       <input id="edit-task-input" type="text" :value="task.name" @keyup.enter="updateTask" @keyup.esc="cancelUpdating" ref="editTaskField">
       <button class="btn btn-close-editing" @click="cancelUpdating"><icon name="times" scale="1"></icon></button>
@@ -119,6 +120,23 @@ import vClickOutside from 'v-click-outside'
             })
           }).then(response => response.json())
             .catch(error => console.log(error))
+        },
+
+        updateDeadline() {
+          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+          const deadlineInput = this.$refs.deadlineInput.value
+          fetch(editTaskUrl, {
+            method: "PUT",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + localStorage.token
+            },
+            body: JSON.stringify({
+              deadline: deadlineInput
+            })
+          }).then(response => response.json())
+            .catch(error => console.log(error))
         }
       }
     }
@@ -153,7 +171,7 @@ import vClickOutside from 'v-click-outside'
   padding-left: 20px;
   margin-left: 47px;
   border-left: 1px solid #ddd;
-  width: calc(100% - 180px);
+  width: calc(100% - 310px);
 }
 
 .task-box .task-name:before,
@@ -172,6 +190,13 @@ import vClickOutside from 'v-click-outside'
 .task-box .task-name:after {
   right: 115px;
   top: 0;
+}
+
+#deadline-input {
+  position: absolute;
+  right: 126px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #edit-task-input {
