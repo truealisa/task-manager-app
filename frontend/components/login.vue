@@ -66,6 +66,7 @@ export default {
     requestSucceed (jsonResponse) {
       if (!jsonResponse.auth_token) {
         this.error = "Your email or password is incorrect"
+        setTimeout(() => { this.error = false }, 5000)
         return
       }
       localStorage.token = jsonResponse.auth_token

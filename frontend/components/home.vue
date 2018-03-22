@@ -10,6 +10,7 @@
             <div class="modal-wrapper">
               <div class="modal-dialog">
                 <div class="modal-content">
+                  <div class="alert alert-danger" v-if="error">{{ error }}</div>
                   <div class="modal-header">
                     <button type="button" class="close" @click="cancelAdding">
                       <span aria-hidden="true">&times;</span>
@@ -89,8 +90,13 @@ export default {
     },
 
     addRequestSucceed (jsonResponse) {
-      this.projects.push(jsonResponse)
-      this.cancelAdding()
+      if (!jsonResponse.message) {
+        this.projects.push(jsonResponse)
+        this.cancelAdding()
+      } else {
+        this.error = jsonResponse.message
+        setTimeout(() => { this.error = false }, 5000)
+      }
     },
 
     cancelAdding() {
@@ -128,5 +134,13 @@ export default {
   position: absolute;
   left: 16px;
   top: 11px;
+}
+
+.alert {
+  position: absolute;
+  top: -58px;
+  width: 100%;
+  z-index: 999;
+  animation: fadein 0.6s;
 }
 </style>

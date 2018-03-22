@@ -31,6 +31,7 @@
         </div>
       </transition>
     </div>
+    <div class="alert alert-danger" v-bind:class="{'modal-alert': showTaskModal}" v-if="error">{{ error }}</div>
   </div>
 </template>
 
@@ -42,7 +43,8 @@ export default {
   data () {
     return {
       showTaskModal: false,
-      project: this.$parent.$data
+      project: this.$parent.$data,
+      error: false
     }
   },
   methods: {
@@ -76,12 +78,17 @@ export default {
     },
 
     requestSucceed (jsonResponse) {
-      this.$parent.$data.tasks = jsonResponse.tasks
-      this.showTaskModal = false
-      this.$refs.addTaskInput.value = ""
-      this.$refs.taskDescription.value = ""
-      this.$refs.taskDeadline.value = ""
-      this.$refs.taskPriority.value = ""
+      if (!jsonResponse.message) {
+        this.$parent.$data.tasks = jsonResponse.tasks
+        this.showTaskModal = false
+        this.$refs.addTaskInput.value = ""
+        this.$refs.taskDescription.value = ""
+        this.$refs.taskDeadline.value = ""
+        this.$refs.taskPriority.value = ""
+      } else {
+        this.error = jsonResponse.message
+        setTimeout(() => { this.error = false }, 5000)
+      }
     }
   }
 }
@@ -155,5 +162,17 @@ export default {
 .modal-title {
   font-size: 20px;
   text-align: center;
+}
+
+.alert {
+  position: absolute;
+  top: -58px;
+  width: 94%;
+  z-index: 999;
+  animation: fadein 0.6s;
+}
+
+.modal-alert {
+  top: -172px;
 }
 </style>
