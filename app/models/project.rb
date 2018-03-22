@@ -3,5 +3,5 @@ class Project < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   # validations
-  validates_presence_of :title, :created_by
+  validates_presence_of :title, :user_id
 end

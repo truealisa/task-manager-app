@@ -5,7 +5,7 @@ RSpec.describe Project, type: :model do
   # ensure Project model has a 1:m relationship with the Task model
   it { should have_many(:tasks).dependent(:destroy) }
   # Validation tests
-  # ensure columns title and created_by are present before saving
+  # ensure columns title and user_id are present before saving
   it { should validate_presence_of(:title) }
-  it { should validate_presence_of(:created_by) }
+  it { should validate_presence_of(:user_id) }
 end
