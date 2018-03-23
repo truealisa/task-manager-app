@@ -21,7 +21,11 @@ class ProjectsController < ApplicationController
   # PUT /projects/:id
   def update
     @project.update(project_params)
-    json_response(@project)
+    if @project.update(project_params)
+      render(json: @project.to_json, status: :ok)
+    else
+      render(json: { error: 'Invalid name' }, status: :unprocessable_entity)
+    end
   end
 
   # DELETE /projects/:id

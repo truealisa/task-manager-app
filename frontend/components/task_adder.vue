@@ -78,6 +78,7 @@ export default {
     },
 
     requestSucceed (jsonResponse) {
+      console.log(jsonResponse)
       if (!jsonResponse.message) {
         this.$parent.$data.tasks = jsonResponse.tasks
         this.showTaskModal = false

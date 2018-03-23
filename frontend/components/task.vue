@@ -21,125 +21,127 @@
 import { apiUrls } from '../global_variables'
 import vClickOutside from 'v-click-outside'
 
-    export default {
-      name: 'Task',
-      props: ['task'],
-      directives: {
-        clickOutside: vClickOutside.directive
-      },
-      data () {
-        return {
-          project: this.$parent.$data,
-          taskEditing: false
-        }
-      },
-      methods: {
-        removeTask () {
-          const removeTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
-          fetch(removeTaskUrl, {
-                method: "DELETE",
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': "Bearer " + localStorage.token
-                }
-          }).then(response => response.json())
-            .then(json => this.$parent.$data.tasks = json)
-        },
-
-        editTask() {
-          this.taskEditing = true
-          this.$nextTick(() => {
-            this.$refs.editTaskField.focus()
-          })
-        },
-
-        updateTask() {
-          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
-          const editTaskInput = this.$refs.editTaskField.value
-          fetch(editTaskUrl, {
-            method: "PUT",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': "Bearer " + localStorage.token
-            },
-            body: JSON.stringify({
-              name: editTaskInput
-            })
-          }).then(response => response.json())
-            .catch(error => console.log(error))
-          this.task.name = editTaskInput
-          this.taskEditing = false
-        },
-
-        cancelUpdating() {
-          this.taskEditing = false
-        },
-
-        toggleStatus() {
-          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
-          fetch(editTaskUrl, {
-            method: "PUT",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': "Bearer " + localStorage.token
-            },
-            body: JSON.stringify({
-              status: this.task.status
-            })
-          }).then(response => response.json())
-            .catch(error => console.log(error))
-        },
-
-        increasePriority() {
-          this.task.priority = parseInt(this.task.priority) + 1
-          this.updatePriority()
-        },
-
-        decreasePriority() {
-          if (this.task.priority == 0) {
-            return
-          }
-          this.task.priority = parseInt(this.task.priority) - 1
-          this.updatePriority()
-        },
-
-        updatePriority() {
-          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
-          fetch(editTaskUrl, {
-            method: "PUT",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': "Bearer " + localStorage.token
-            },
-            body: JSON.stringify({
-              priority: this.task.priority
-            })
-          }).then(response => response.json())
-            .catch(error => console.log(error))
-        },
-
-        updateDeadline() {
-          const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
-          const deadlineInput = this.$refs.deadlineInput.value
-          fetch(editTaskUrl, {
-            method: "PUT",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': "Bearer " + localStorage.token
-            },
-            body: JSON.stringify({
-              deadline: deadlineInput
-            })
-          }).then(response => response.json())
-            .catch(error => console.log(error))
-        }
-      }
+export default {
+  name: 'Task',
+  props: ['task'],
+  directives: {
+    clickOutside: vClickOutside.directive
+  },
+  data () {
+    return {
+      project: this.$parent.$data,
+      taskEditing: false
     }
+  },
+  methods: {
+    removeTask () {
+      const removeTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+      fetch(removeTaskUrl, {
+        method: "DELETE",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + localStorage.token
+        }
+      }).then(response => response.json())
+      .then(json => this.$parent.$data.tasks = json)
+    },
+
+    editTask() {
+      this.taskEditing = true
+      this.$nextTick(() => {
+        this.$refs.editTaskField.focus()
+      })
+    },
+
+    updateTask() {
+      const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+      const editTaskInput = this.$refs.editTaskField.value
+      if (editTaskInput) {
+        fetch(editTaskUrl, {
+          method: "PUT",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.token
+          },
+          body: JSON.stringify({
+            name: editTaskInput
+          })
+        }).then(response => { response.json(); console.log(response.json()) })
+        .catch(error => console.log(error))
+        this.task.name = editTaskInput
+        this.taskEditing = false
+      }
+    },
+
+    cancelUpdating() {
+      this.taskEditing = false
+    },
+
+    toggleStatus() {
+      const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+      fetch(editTaskUrl, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + localStorage.token
+        },
+        body: JSON.stringify({
+          status: this.task.status
+        })
+      }).then(response => response.json())
+      .catch(error => console.log(error))
+    },
+
+    increasePriority() {
+      this.task.priority = parseInt(this.task.priority) + 1
+      this.updatePriority()
+    },
+
+    decreasePriority() {
+      if (this.task.priority == 0) {
+        return
+      }
+      this.task.priority = parseInt(this.task.priority) - 1
+      this.updatePriority()
+    },
+
+    updatePriority() {
+      const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+      fetch(editTaskUrl, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + localStorage.token
+        },
+        body: JSON.stringify({
+          priority: this.task.priority
+        })
+      }).then(response => response.json())
+      .catch(error => console.log(error))
+    },
+
+    updateDeadline() {
+      const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id
+      const deadlineInput = this.$refs.deadlineInput.value
+      fetch(editTaskUrl, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + localStorage.token
+        },
+        body: JSON.stringify({
+          deadline: deadlineInput
+        })
+      }).then(response => response.json())
+      .catch(error => console.log(error))
+    }
+  }
+}
 </script>
 
 <style>

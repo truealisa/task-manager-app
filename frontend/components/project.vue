@@ -61,20 +61,22 @@ export default {
     updateProject() {
       const editProjectUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id
       const editProjectInput = this.$refs.editProjectField.value
-      fetch(editProjectUrl, {
-        method: "PUT",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': "Bearer " + localStorage.token
-        },
-        body: JSON.stringify({
-          title: editProjectInput
-        })
-      }).then(response => response.json())
+      if (editProjectInput) {
+        fetch(editProjectUrl, {
+          method: "PUT",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.token
+          },
+          body: JSON.stringify({
+            title: editProjectInput
+          })
+        }).then(response => response.json())
         .catch(error => console.log(error))
-      this.project.title = editProjectInput
-      this.projectEditing = false
+        this.project.title = editProjectInput
+        this.projectEditing = false
+      }
     },
 
     cancelUpdating() {

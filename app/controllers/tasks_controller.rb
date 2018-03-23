@@ -21,8 +21,11 @@ class TasksController < ApplicationController
   # PUT /projects/:project_id/tasks/:id
   def update
     @task.update(task_params)
-    json_response(@task)
-    # head :no_content
+    if @task.update(task_params)
+      render(json: @task.to_json, status: :ok)
+    else
+      render(json: { error: 'Invalid name' }, status: :unprocessable_entity)
+    end
   end
 
   # DELETE /projects/:project_id/tasks/:id
