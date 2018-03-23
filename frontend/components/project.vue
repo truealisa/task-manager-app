@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     sortedTasks: function () {
-      return this.tasks.sort((a, b) => b.priority - a.priority).sort((a, b) => a.status - b.status)
+      return this.tasks.sort((a, b) => a.priority - b.priority).sort((a, b) => a.status - b.status)
     }
   },
   components: {

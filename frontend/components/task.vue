@@ -96,17 +96,31 @@ export default {
     },
 
     increasePriority() {
-      this.task.priority = parseInt(this.task.priority) + 1
-      this.updatePriority()
-    },
-
-    decreasePriority() {
-      if (this.task.priority == 0) {
+      if (this.task.priority == 1) {
         return
       }
       this.task.priority = parseInt(this.task.priority) - 1
       this.updatePriority()
     },
+
+    decreasePriority() {
+      if (this.task.priority == this.project.tasks.length) {
+        return
+      }
+      this.task.priority = parseInt(this.task.priority) + 1
+      this.updatePriority()
+    },
+
+    // changeNextTaskPriority(modificator) {
+    //   console.log(this.project.tasks)
+    //   this.project.tasks.forEach((task, index) => {
+    //     console.log(task.priority, index, this.task.priority)
+    //     if (task.priority == this.task.priority && task != this.task) {
+    //       // this.project.tasks[index].priority = oldPriority
+    //       console.log(modificator)
+    //     }
+    //   })
+    // },
 
     updatePriority() {
       const editTaskUrl = apiUrls.baseURL + apiUrls.projectsAffix + "/" + this.project.id + apiUrls.tasksAffix + "/" + this.task.id

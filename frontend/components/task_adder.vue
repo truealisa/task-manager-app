@@ -21,8 +21,6 @@
                   <input id="modal-task-description" ref="taskDescription" class="form-control" type="text" placeholder="Save the World"><br>
                   <label for="modal-task-deadline">Deadline</label><br>
                   <input id="modal-task-deadline" ref="taskDeadline" class="form-control" type="date" placeholder="Deadline"><br>
-                  <label for="modal-task-priority">Priority</label><br>
-                  <input id="modal-task-priority" ref="taskPriority" class="form-control" type="number" placeholder="From 0 and above"><br>
                   <button class="btn btn-primary btn-block btn-modal-add-task" @click="createTask">Create task</button>
                 </div>
               </div>
@@ -54,11 +52,10 @@ export default {
       if (this.showTaskModal) {
         taskDescription = this.$refs.taskDescription.value
         taskDeadline = this.$refs.taskDeadline.value
-        taskPriority = this.$refs.taskPriority.value || 0
       } else {
         taskDescription = this.$refs.addTaskInput.value
-        taskPriority = 0
       }
+      taskPriority = this.project.tasks.length + 1
       if (!taskDescription) { return }
       fetch(createTaskUrl, {
         method: "POST",
